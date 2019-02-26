@@ -459,8 +459,8 @@ int main(void)
 			if (distance_valid)
 			{
 				/* calc velocity (negative of flow values scaled with distance) */
-				float new_velocity_x = - flow_compx * sonar_distance_filtered;
-				float new_velocity_y = - flow_compy * sonar_distance_filtered;
+				float new_velocity_x = - flow_compx;// * sonar_distance_filtered;
+				float new_velocity_y = - flow_compy;// * sonar_distance_filtered;
 
 				time_since_last_sonar_update = (get_boot_time_us()- get_sonar_measure_time());
 
