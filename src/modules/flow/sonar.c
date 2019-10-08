@@ -200,6 +200,8 @@ bool sonar_read(float* sonar_value_filtered, float* sonar_value_raw)
 
 	*sonar_value_filtered = x_post;
 	*sonar_value_raw = sonar_raw;
+	
+	sonar_valid = true;    //we arent using it anyways
 
 	return sonar_valid;
 }
