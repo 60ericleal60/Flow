@@ -478,11 +478,11 @@ int main(void)
 
 
 			/* integrate velocity and output values only if distance is valid */
-			//if (distance_valid)
-			//{
+			if (distance_valid)
+			{
 				/* calc velocity (negative of flow values scaled with distance) */
-				float new_velocity_x = - flow_compx;// * sonar_distance_filtered;
-				float new_velocity_y = - flow_compy;// * sonar_distance_filtered;
+				float new_velocity_x = - flow_compx * sonar_distance_filtered;
+				float new_velocity_y = - flow_compy * sonar_distance_filtered;
 
 				time_since_last_sonar_update = (get_boot_time_us()- get_sonar_measure_time());
 
@@ -503,16 +503,13 @@ int main(void)
 					velocity_x_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_x_lp;
 					velocity_y_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_y_lp;
 				}
-			//}
-
-/*
-      else
+			}
+			else
 			{
-
+				/* taking flow as zero */
 				velocity_x_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_x_lp;
 				velocity_y_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_y_lp;
 			}
-*/
 			//update lasttime
 			lasttime = get_boot_time_us();
 
