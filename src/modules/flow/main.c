@@ -11,14 +11,13 @@ Learn Git and GitHub without any code!
 Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
 
 
-0
-032360ericleal60/Flow
-forked from PX4/Flow
- Code Pull requests 0 Projects 0 Wiki Security Insights Settings
+64
+190323PX4/Flow
+ Code Issues 24 Pull requests 5 Actions Projects 0 Wiki Security Insights
 Flow/src/modules/flow/main.c
-@60ericleal60 60ericleal60 Update main.c
-a758eb1 on Feb 26
-@LorenzMeier@jgoppert@60ericleal60
+@jgoppert jgoppert Improve performance for indoors and auto exposure/gain, add more params.
+5e69f1d on Aug 15, 2017
+@LorenzMeier@jgoppert
 721 lines (609 sloc)  20.4 KB
   
 /****************************************************************************
@@ -479,22 +478,16 @@ int main(void)
 
 
 			/* integrate velocity and output values only if distance is valid */
-	//		if (distance_valid)
-	//		{
+			//if (distance_valid)
+			//{
 				/* calc velocity (negative of flow values scaled with distance) */
-/*
-        float new_velocity_x = - flow_compx;// * sonar_distance_filtered;
+				float new_velocity_x = - flow_compx;// * sonar_distance_filtered;
 				float new_velocity_y = - flow_compy;// * sonar_distance_filtered;
 
 				time_since_last_sonar_update = (get_boot_time_us()- get_sonar_measure_time());
-*/
+
 				if (qual > 0)
 				{
-          float new_velocity_x = - flow_compx;// * sonar_distance_filtered;
-          float new_velocity_y = - flow_compy;// * sonar_distance_filtered;
-  
-          time_since_last_sonar_update = (get_boot_time_us()- get_sonar_measure_time());
-          
 					velocity_x_sum += new_velocity_x;
 					velocity_y_sum += new_velocity_y;
 
@@ -510,13 +503,16 @@ int main(void)
 					velocity_x_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_x_lp;
 					velocity_y_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_y_lp;
 				}
-//			}
-			else
+			//}
+
+/*
+      else
 			{
-				/* taking flow as zero */
+
 				velocity_x_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_x_lp;
 				velocity_y_lp = (1.0f - global_data.param[PARAM_BOTTOM_FLOW_WEIGHT_NEW]) * velocity_y_lp;
 			}
+*/
 			//update lasttime
 			lasttime = get_boot_time_us();
 
